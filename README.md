@@ -1,4 +1,6 @@
 Local Incident Response Assistant is a specialized SRE agent designed to automate Kubernetes troubleshooting. By combining the reasoning capabilities of Llama 3.2 with direct cluster access, it can identify, describe, and log-analyze failing pods to provide a definitive root cause in seconds.
+
+
 ⚙️ Core Architecture
 
 The system is built on a "Reasoning and Action" loop:
@@ -8,6 +10,7 @@ The system is built on a "Reasoning and Action" loop:
     The Hands: A custom set of LangChain tools that wrap kubectl commands to interact with the live cluster.
 
     The Agent: A LangChain agent that determines which tool to call based on the user's natural language query.
+
 
 🛠️ Integrated Tools
 
@@ -37,6 +40,8 @@ Ensure Ollama is running locally and you have the required Python packages:
 3. Run the Assistant
 
 Execute main.py to start the diagnostic session. The agent will automatically detect that the payment-service pod is crashing because of the exit 1 command in its specification.
+
+
 📝 Project Files
 
     crash.yaml: A Kubernetes manifest for a payment-service pod using a busybox image that triggers a crash loop.
