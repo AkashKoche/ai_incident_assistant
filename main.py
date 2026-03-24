@@ -1,21 +1,30 @@
-from langchain.agents import initialize_agent, AgentType
-from langchain_community.llms import Ollama
+from langchain.agents import create_agent
+from langchain_ollama import ChatOllama
+
 from tools import get_pods, get_logs, describe_pod
 
-llm = Ollama(model="llama3.2:3b", temprature=0)
+# LLM
+llm = ChatOllama(
+    model="llama3.2:3b", 
+    temperature=0
+)
 
 tools = [get_pods, get_logs, describe_pod]
 
-agent = initialize_agent(
-        tools=tools,
-        llm=llm,
-        agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-        verbose=True,
-        handle_parsing_errors=True
+# Create agent (NEW WAY)
+agent = create_agent(
+    model=llm,
+    tools=tools,
+    system_prompt="""
+You are a Kubernetes SRE assistant.
+Debug issues using tools.
+Give clear root cause and fix.
+"""
 )
 
-if __name__ == "__main__":
-    query = "What's Wrong woth my payment service pod in the default namespace?"
-    response = agent.run(query)
-    print("\n=== Final Answer")
-    print(response)
+# Run
+response = agent.invoke({
+    "messages": [{"role": "user", "content": "Why is my payment pod failing?"}]
+})
+
+print(response)
