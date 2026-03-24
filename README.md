@@ -17,6 +17,8 @@ The agent has access to the following capabilities via tools.py:
 | get_pods | Lists all pods in a namespace to check status. | kubectl get pods |
 | get_logs | Fetches the last 50 lines of container logs. | kubectl logs --tail=50 |
 | describe_pod | Provides deep metadata and cluster events. | kubectl describe pod |
+
+
 🚀 Quick Start
 1. Simulate a Failure
 
