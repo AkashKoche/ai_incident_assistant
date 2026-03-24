@@ -23,16 +23,16 @@ The agent has access to the following capabilities via tools.py:
 1. Simulate a Failure
 
 Deploy the included crash.yaml to create a pod that is hardcoded to fail after five seconds:
-Bash
 
-kubectl apply -f crash.yaml
+
+    kubectl apply -f crash.yaml
 
 2. Configure the Environment
 
 Ensure Ollama is running locally and you have the required Python packages:
-Bash
 
-pip install langchain langchain_ollama
+
+    pip install langchain langchain_ollama
 
 3. Run the Assistant
 
